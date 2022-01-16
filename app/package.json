@@ -1,4 +1,5 @@
 {
+  "license": "GPL-3.0",
   "name": "rabbit-cache",
   "version": "0.1.0",
   "private": true,

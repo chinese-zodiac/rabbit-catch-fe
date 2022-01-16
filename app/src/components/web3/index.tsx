@@ -8,14 +8,16 @@ import constate from 'constate';
 //the default chain needs to be the first One
 const supportedChains: ChainInfo[] = [
     { chainId: '56', name: 'Binance Smart Chain', hexChainId: '0x38', rpcProvider: 'https://bsc-dataseed.binance.org/', contracts:{
-        rabbitMaster:'0x00',
-        czodiacNFT:'0x00',
-        rabbitRocket:'0x00',
-        rabbitGreed:'0x00',
-        rabbitCreed:'0x00'
+        rabbitMaster:'0x0D3ab3581b81fd96b57e31Daf292150062489585',
+        czodiacNFT:'0x6Bf5843b39EB6D5d7ee38c0b789CcdE42FE396b4',
+        rabbitRocket:'0x3aAe3529335724d3e2D1ae327860476e7dC3b202',
+        rabbitGreed:'0x44Bdd0BD0C408D51E466de4c480Fd2E56ca80912',
+        rabbitCreed:'0xEA116b23d10e0e3FAB473FFa01e920A1B56393c3',
+        //rabbitFancier:'0x174a786a5dd24024Ce4b9865Cb37acFb6dc9C984',
+        //rabbitBreed:'0x004204d403636D3343e7D2aEE584E673981a569c'
     } },
     { chainId: '97', name: 'bsc Testnet', hexChainId: '0x61', rpcProvider: 'https://data-seed-prebsc-1-s1.binance.org:8545/',contracts:{
-        rabbitMaster:'0x0B354F634E142183827C6bB413E7afB4388D13C9',
+        rabbitMaster:'0x0D3ab3581b81fd96b57e31Daf292150062489585',
         czodiacNFT:'0x17A894724063e274E355285B2B5A36d8b1493C0f',
         rabbitRocket:'0x85b4E156d1BBEb532DD74cA503AC9a62B80bb9dE',
         rabbitGreed:'0x2d5a53fF2850AEb2EEb1941B2D401A1a9B0C5B51',
@@ -120,9 +122,9 @@ export function ConnectWallet() {
         (async () => {
             try {
 
-                if(!usingTestnet){
+                /*if(!usingTestnet){
                     throw new Error('mainnet contracts not yet deployed. Try on testnet by adding "?network=test"');
-                }
+                }*/
 
                 const chainInfo = supportedChains[usingTestnet ? 1 : 0];
 
