@@ -61,6 +61,9 @@ export class Injectedweb3 {
 
         const { chainId } = chainInfo;
 
+        //For trust wallet/safepal, since they do not support EIP-3326 (switching networks)
+        if(!!this.injected.isTrust) return;
+
         try {
             console.log(`current chain id ${this.injected.networkVersion}`);
 
