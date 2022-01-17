@@ -110,13 +110,14 @@ export class Injectedweb3 {
                 } catch (addError: any) {
 
                     console.error(`failed to add network : ${addError?.message}`);
-                    throw new Error("failed to switch network. Please switch manually and try again");
+                    throw new Error("failed to switch network. Please switch manually and try again "+switchError.code);
                 }
             }
 
-            console.error(`failed to switch network : ${switchError}`);
+            //Do not throw error , due to poor support for EIP-3326 in web3 wallets that appear to be identical to metamask but do not support network switching.
+            //console.error(`failed to switch network : ${switchError}`);
 
-            throw new Error("failed to switch network. Please switch manually and try again");
+            //throw new Error("failed to switch network. Please switch manually and try again");
         }
 
     }
