@@ -132,10 +132,6 @@ export default function MintView() {
 
                     {!!referralCode && <div className='refCode'>
                         <span>Using referral code : <span className='text-info'>{referralCode}</span></span>
-                        <Button variant='link' className="ms-2" onClick={()=>{
-                            setReferralCode('');
-                            localStorage?.removeItem(_refCodeStore);
-                        }}> <FontAwesomeIcon className="text-warning" icon={faTrashAlt}  /></Button>
                     </div>
                     }
 
