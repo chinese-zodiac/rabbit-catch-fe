@@ -61,7 +61,7 @@ export default function WinnersView() {
 
     return <div className='winnersView text-center'>
 
-        <h6>Rabbit greed most mints</h6>
+        <h6>Rabbit Greed (most mints)</h6>
         {!!winners?.isLoading && <Spinner animation="border" variant="info" />}
 
         {!!winners?.error && <ShowError error={winners?.error} />}

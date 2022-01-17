@@ -99,7 +99,7 @@ export default function MintView() {
             <div className="d-flex flex-wrap gap-2 justify-content-between align-items-center">
 
                 <div>
-                    <h2>Rabbit Chase</h2>
+                    <h2>Rabbit Catch</h2>
 
                     {!!mintState?.isLoading && <Spinner animation="border" variant="primary" />}
 
