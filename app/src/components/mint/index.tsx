@@ -26,6 +26,7 @@ export default function MintView() {
         price: string;
         priceWei: string;
         mintCount:string;mintCountMax:string;
+        whitelist: Boolean;
     }>>();
 
     const [submitted, setSubmitted] = useState<IAsyncResult<string>>();
@@ -77,9 +78,10 @@ export default function MintView() {
                 const mintCount = await rabbitCache.methods.mintCount().call();
                 const mintCountMax = await rabbitCache.methods.mintCountMax().call();
 
+                const whitelist = await rabbitCache.methods.whitelist(account).call();
                 const canMint = await rabbitCache.methods.canMint(account).call();
 
-                setMintState({ result: { canMint, price, priceWei, mintCount,  mintCountMax} });
+                setMintState({ result: { canMint, price, priceWei, mintCount,  mintCountMax, whitelist} });
 
 
             } catch (error: any) {
@@ -117,6 +119,7 @@ export default function MintView() {
 
 
             {!!mintState?.result && <>
+                {mintState?.result?.whitelist ? <p className='text-success'>You are whitelisted</p> : <p className='text-warning'>You are not whitelisted</p>}
                 {mintState?.result?.canMint ? <div className="d-grid gap-2 my-2">
 
                     {!!submitted?.isLoading && <div className='text-center'>
