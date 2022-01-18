@@ -20,6 +20,7 @@ import ReferralView from './components/referral';
 import ClaimsView from './components/claims';
 
 
+
 function Bottombar(){
 
   return <div className='bottomBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
@@ -33,6 +34,18 @@ function Bottombar(){
     <Link to="/claims">
       <a className="link">claims</a>
     </Link>
+
+
+  </div>;
+}
+
+function Socialbar(){
+
+  return <div className='socialBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
+
+    <a className="link" target="_blank" href="https://t.me/CZodiacofficial">telegram🡥</a>
+    <a className="link" target="_blank" href="https://twitter.com/zodiacs_c">twitter🡥</a>
+    <a className="link" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch">whitepaper🡥</a>
 
 
   </div>;
@@ -94,6 +107,8 @@ export default function App() {
       </div>
 
       <Bottombar/>
+
+      <Socialbar/>
 
     </div>
     </HashRouter></Web3Provider>;

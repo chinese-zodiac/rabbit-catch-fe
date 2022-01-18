@@ -31,6 +31,33 @@
 
   font-size: x-small;
 
+  padding-top:5px;
+  padding-bottom:5px;
+
+  a{
+    &:hover{
+      color: $gray-200;
+    }
+
+    color: $gray-500;
+    text-decoration: none;
+    
+  }
+
+}
+
+.socialBar{
+
+  background-color: $gray-900;
+  height: 2.5rem;
+
+  font-size: x-small;
+  
+  padding-top:5px;
+  padding-bottom:5px;
+  
+  border-top: solid 1px gray;
+
   a{
     &:hover{
       color: $gray-200;

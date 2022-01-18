@@ -11,6 +11,10 @@ import { Row, Col, Button } from 'react-bootstrap';
 import TimesView from './times';
 import WinnersView from './winners';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
+
 /*
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -102,7 +106,10 @@ export default function MintView() {
             <div className="d-flex flex-wrap gap-2 justify-content-between align-items-center">
 
                 <div>
-                    <h2>Rabbit Catch</h2>
+                    <h2 className="title">Rabbit Catch 
+                    <a className="info-link" title="Click to visit Whitepaper for Rabbit Catch" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch">
+                        <FontAwesomeIcon icon={faQuestionCircle} />
+                    </a></h2>
 
                     {!!mintState?.isLoading && <Spinner animation="border" variant="primary" />}
 
@@ -120,7 +127,7 @@ export default function MintView() {
 
 
             {!!mintState?.result && <>
-                {mintState?.result?.whitelist ? <p className='text-success'>You are whitelisted</p> : <p className='text-warning'>You are not whitelisted</p>}
+                {mintState?.result?.whitelist ? <p className='text-success  timesView'>You are whitelisted</p> : <p className='text-warning'>You are not whitelisted</p>}
                 {mintState?.result?.canMint ? <div className="d-grid gap-2 my-2">
 
                     {!!submitted?.isLoading && <div className='text-center'>
