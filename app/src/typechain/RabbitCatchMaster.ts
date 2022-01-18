@@ -88,6 +88,8 @@ export interface RabbitCatchMaster extends BaseContract {
 
     renounceOwnership(): NonPayableTransactionObject<void>;
 
+    setWhitelistedAll(_addr: string[]): NonPayableTransactionObject<void>;
+
     transferOwnership(newOwner: string): NonPayableTransactionObject<void>;
 
     updateWhitelist(

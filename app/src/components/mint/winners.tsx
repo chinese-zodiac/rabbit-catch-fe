@@ -18,6 +18,7 @@ export default function WinnersView() {
     const [winners, setWinners] = useState<IAsyncResult<{
         address: string;
         color: string;
+        buys:string;
     }[]>>();
 
     const { chainInfo, account, web3 } = useweb3Context() || {};
@@ -40,11 +41,16 @@ export default function WinnersView() {
                 const second = await rabbitGreed.methods.second().call();
                 const third = await rabbitGreed.methods.third().call();
 
-                const result = [
+                const positions = [
                     { address: first, color: '#FFD700' },
                     { address: second, color: '#C0C0C0' },
                     { address: third, color: '#CD7F32' }
                 ];
+
+                const result = await Promise.all(positions.map(async p=>{
+                    const buys = await rabbitGreed.methods.totalBuys(p.address).call();
+                    return ({...p,buys});
+                }));
 
                 setWinners({ result });
 
@@ -66,7 +72,9 @@ export default function WinnersView() {
 
         {!!winners?.error && <ShowError error={winners?.error} />}
 
-        {(winners?.result || []).map((s, i) => <div key={i} className='winnerItem d-flex align-items-center justify-content-center gap-3 my-2'>
+        <div className='mintedlabel me-2'>minted</div>
+        
+        {(winners?.result || []).map((s, i) => <div key={i} className='winnerItem d-flex align-items-center justify-content-center gap-3 mb-2'>
             <div className="certHolder">
                 <FontAwesomeIcon className="certback" icon={faCertificate} style={{ color: s.color }} />
                 <span className="score">{i + 1}</span>
@@ -75,6 +83,7 @@ export default function WinnersView() {
 
             </div>
             <ShowAddress address={s.address} />
+            <span className='ms-1'>{s.buys}</span>
         </div>
         )}
     </div>;

@@ -13,6 +13,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import MintView from './components/mint';
 import OwnedView from './components/owned';
 import ReferralView from './components/referral';
+import ClaimsView from './components/claims';
 
 
 function Bottombar(){
@@ -25,6 +26,10 @@ function Bottombar(){
     <span>|</span>
     <Link href="/referral">
       <a className="link">referral</a>
+    </Link>
+    <span>|</span>
+    <Link href="/claims">
+      <a className="link">claims</a>
     </Link>
 
 
@@ -71,6 +76,10 @@ function MainContent() {
 
     <Route path="/referral">
       {() => <ReferralView/>}
+    </Route>
+
+    <Route path="/claims">
+      {() => <ClaimsView/>}
     </Route>
 
     <Route path="/:rest">

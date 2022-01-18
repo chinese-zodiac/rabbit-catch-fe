@@ -7,6 +7,7 @@ import { RabbitRocket } from '../../typechain/RabbitRocket';
 import RabbitRocket_json from '../../typechain/RabbitRocket.json';
 
 import moment from 'moment';
+import 'moment-duration-format';
 
 
 export default function TimesView() {
@@ -39,12 +40,17 @@ export default function TimesView() {
                     { prompt: 'Might end', epoch: endEpoch }
                 ].map(c => {
                     const t = moment.unix(Number.parseInt(c.epoch));
-                    if (t.isBefore(moment())) {
+                    const now = moment();
+                    if (t.isBefore(now)) {
                         console.debug(`${c.prompt} is in the past`);
                         return undefined;
                     }
 
-                    return `${c.prompt} ${t.fromNow()}`;
+                    //return `${c.prompt} ${t.fromNow()}`;
+
+                    const duration =  moment.duration( t.diff(now));
+
+                    return `${c.prompt} in ${duration.format('D [days], h [hours]')}`;
                 }).filter(s=>!!s);
 
 
