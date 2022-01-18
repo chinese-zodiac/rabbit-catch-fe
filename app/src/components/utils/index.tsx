@@ -1,13 +1,21 @@
 import {FunctionComponent} from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 export function useQueryParams(){
 
+    /*
     if(!window?.location?.search)
         return {};
+    */
+    const {search} = useLocation();
+    
+    console.debug(`search is ${search}`);
 
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    return Object.fromEntries(urlSearchParams);
+    const urlSearchParams = search && new URLSearchParams(search);
+    return urlSearchParams?Object.fromEntries(urlSearchParams):{};
 } 
+
 
 interface IAsyncResultBase {
     isLoading?: boolean;
@@ -18,6 +26,17 @@ interface IAsyncResultBase {
 export interface IAsyncResult<T> extends IAsyncResultBase {
     result?: T;
 }
+
+export async function fetchJsonAsync<T>(responsePromise: Promise<Response>) {
+    const responce = await checkFetchErrorAsync(responsePromise);
+
+    return (await responce.json()) as T;
+}
+
+export const unAuthhandler = {
+    onUnAuthorized :  ()=>{}
+};
+
 
 export const ShowError: FunctionComponent<{ error: Error | undefined }> = ({ error }) => {
     if (!error)
@@ -32,5 +51,53 @@ export const ShowError: FunctionComponent<{ error: Error | undefined }> = ({ err
         <span className='text-danger'> {errStr}</span>
     </div>;
 }
+
+export async function checkFetchErrorAsync(responsePromise: Promise<Response>) {
+
+    const response = await responsePromise;
+
+    if (!response.ok) {
+
+        console.log(`checkFetchError NON OK response : status ${response.status} : ${response.statusText}`);
+
+        if(401 == response.status){
+            //jwt is invalid
+            console.log(`calling unAuthhandler.onUnAuthorized`);
+            unAuthhandler.onUnAuthorized();
+        }
+
+        if (!response.headers)
+            console.error('checkFetchError called with non http response');
+
+        try {
+            const contentType = response.headers.get('content-type');
+
+            if (contentType && contentType.indexOf('application/json') != -1) {
+                const err = await response.json();
+                throw new Error(err?.Message || err?.message || 'unknown error');
+            } else if (contentType && contentType.indexOf('text/plain') != -1) {
+                const err = await response.text();
+
+                throw new Error(response.statusText + ' : ' + err);
+            }
+        } catch (err:any) {
+            //strange the error show up here
+            if(!!err?.message){
+                throw new Error(err.message);
+            }
+            console.debug('we don\'t have error body');
+
+        }
+
+
+        {
+            throw new Error(response.statusText);
+        }
+
+    }
+    else
+        return response;
+}
+
 
 

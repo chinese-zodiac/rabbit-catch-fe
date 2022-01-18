@@ -11,6 +11,8 @@ export type ChainInfo = {
         rabbitRocket:string;
         rabbitGreed:string;
         rabbitCreed:string;
+        rabbitBreed:string;
+        rabbitFancier:string;
     }
 }
 

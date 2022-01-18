@@ -11,9 +11,10 @@ import { Row, Col, Button } from 'react-bootstrap';
 import TimesView from './times';
 import WinnersView from './winners';
 
+/*
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
+*/
 
 import './mint.scss';
 

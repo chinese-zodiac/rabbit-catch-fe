@@ -1,5 +1,9 @@
 # creating types for contratcs
+> ensure hardhat contracts are compiled (cd ../rabbit-catch-hardhat, yarn, npx hardhat compile)
+
 `npm run generateTypes`
+
+
 
 # dev env
 `yarn start`

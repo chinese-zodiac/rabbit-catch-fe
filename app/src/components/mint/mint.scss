@@ -52,6 +52,12 @@
     .winnersView{
         font-size: smaller;
 
+        .mintedlabel{
+            text-align: right;
+            font-style: italic;
+            color: $gray-400;
+        }
+
         .winnerItem{
 
             .certHolder{
