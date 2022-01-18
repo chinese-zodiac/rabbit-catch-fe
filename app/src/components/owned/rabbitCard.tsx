@@ -9,10 +9,12 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
 
     const [cardDetails, setCardDetails] = useState<IAsyncResult<{
         image: string;
-        tlUrl:string;
+        tlUrl: string;
     }>>();
 
     const { chainInfo } = useweb3Context() || {};
+
+
 
     useEffect(() => {
 
@@ -30,18 +32,50 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
                 //https://czodiac.mypinata.cloud/ipfs/QmZmF4aTdKtRzFj5pZu9MvAspDic9Z6T11ymofnAiV7Gsv/1.json
                 const jsonUri = tokenUri.replace('ipfs://', 'https://czodiac.mypinata.cloud/ipfs/');
 
-                const { image, name } = await fetchJsonAsync<{
-                    name: string;
-                    image: string;
-                }>(fetch(jsonUri));
+                //this fetch sometime fails so we do a progresive delay in loading this
+                for (let i = 0; true; i++) {
 
-                if (!image) {
-                    throw new Error('failed to load NFT details');
+                    try {
+
+                        if(i>0){
+                            const timeout = 5 * i;
+                            console.debug(`nftfetch: try ${i} -> ${timeout} seconds`);
+                            await new Promise(r=>setTimeout(r,timeout*1000));
+                        }
+
+                        /*
+                        if(i<4){
+                            throw new Error(`emulate failure`)
+                        }
+                        */
+
+                        const { image, name } = await fetchJsonAsync<{
+                            name: string;
+                            image: string;
+                        }>(fetch(jsonUri));
+
+                        
+
+                        if (!image) {
+                            throw new Error('failed to load NFT details');
+                        }
+
+                        const tlUrl = `https://treasureland.market/assets/${chainInfo.contracts.czodiacNFT}/${tokenId}?chain_id=${chainInfo.chainId}`;
+                        setCardDetails({ result: { tlUrl, image: image.replace('ipfs://', 'https://czodiac.mypinata.cloud/ipfs/') } });
+        
+                        break;
+
+                    } catch (error: any) {
+
+                        if(10==i){
+                            throw error;
+                        }else{
+                            console.warn(`nftfetch: failed to fetch image will try again ${i} : ${error}`)
+                        }
+
+                    }
+
                 }
-
-                const tlUrl = `https://treasureland.market/assets/${chainInfo.contracts.czodiacNFT}/${tokenId}?chain_id=${chainInfo.chainId}`;
-
-                setCardDetails({ result: { tlUrl, image: image.replace('ipfs://', 'https://czodiac.mypinata.cloud/ipfs/') } });
 
 
 
@@ -51,7 +85,7 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
 
         })();
 
-    }, [tokenUri,chainInfo]);
+    }, [tokenUri, chainInfo]);
 
     return <div className="rCard text-center mb-3">
 
@@ -59,10 +93,10 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
 
         {!!cardDetails?.error && <ShowError error={cardDetails.error} />}
 
-        {cardDetails?.result?.image && <a href={cardDetails?.result?.tlUrl||'#'} target='_blank'>
+        {cardDetails?.result?.image && <a href={cardDetails?.result?.tlUrl || '#'} target='_blank'>
             <Image src={cardDetails?.result?.image} fluid />
             <div className="test-success">View on TL</div>
-            </a>
+        </a>
         }
 
     </div>;
