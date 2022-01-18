@@ -40,7 +40,7 @@ export default function ReferralView() {
         Object.keys(qParams).forEach(k => sParams.append(k, qParams[k]));
 
         const getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host +  '?' + sParams.toString();
+        var baseUrl = getUrl.protocol + "//" + getUrl.host +  '/#/?' + sParams.toString();
 
         return baseUrl;
 

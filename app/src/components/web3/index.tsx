@@ -5,6 +5,8 @@ import { Spinner } from "react-bootstrap";
 import { ChainInfo, Injectedweb3, ConnectCtx } from './injected';
 import constate from 'constate';
 
+import { useLocation } from 'react-router-dom';
+
 //the default chain needs to be the first One
 const supportedChains: ChainInfo[] = [
     { chainId: '56', name: 'Binance Smart Chain', hexChainId: '0x38', rpcProvider: 'https://bsc-dataseed.binance.org/', contracts:{
@@ -89,6 +91,7 @@ function useWeb3() {
 export function ConnectWallet() {
 
     const qParams = useQueryParams();
+    
     const { connect } = useConnectCalls();
     const liftedCtx = useweb3Context();
 
@@ -119,7 +122,7 @@ export function ConnectWallet() {
 
         const usingTestnet = qParams['network'] == 'test';
         console.log(`usingTestnet = ${usingTestnet}`);
-
+        
 
         (async () => {
             try {

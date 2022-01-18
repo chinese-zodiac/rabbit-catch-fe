@@ -59,10 +59,10 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
 
         {!!cardDetails?.error && <ShowError error={cardDetails.error} />}
 
-        {cardDetails?.result?.image && <div>
+        {cardDetails?.result?.image && <a href={cardDetails?.result?.tlUrl||'#'} target='_blank'>
             <Image src={cardDetails?.result?.image} fluid />
-            <a href={cardDetails?.result?.tlUrl||'#'} target='_blank' className="link-success">View on TL</a>
-        </div>
+            <div className="test-success">View on TL</div>
+            </a>
         }
 
     </div>;

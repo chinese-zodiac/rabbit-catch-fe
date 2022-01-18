@@ -1,13 +1,21 @@
 import {FunctionComponent} from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 export function useQueryParams(){
 
+    /*
     if(!window?.location?.search)
         return {};
+    */
+    const {search} = useLocation();
+    
+    console.debug(`search is ${search}`);
 
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    return Object.fromEntries(urlSearchParams);
+    const urlSearchParams = search && new URLSearchParams(search);
+    return urlSearchParams?Object.fromEntries(urlSearchParams):{};
 } 
+
 
 interface IAsyncResultBase {
     isLoading?: boolean;

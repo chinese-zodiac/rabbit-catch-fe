@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.scss';
-import { Link, Route, Switch } from "wouter";
+
+//import { Link, Route, Switch } from "wouter";
+
+import {HashRouter, Link, Routes, Route} from 'react-router-dom';
+
 import { Button, Container } from 'react-bootstrap';
 
 import { ConnectWallet, Web3Provider, useweb3Context, useConnectCalls } from './components/web3';
@@ -20,15 +24,13 @@ function Bottombar(){
 
   return <div className='bottomBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
 
-    <Link href="/">
-      <a className="link">mint</a>
-    </Link>
+    <Link to="/" className="link">mint</Link>
     <span>|</span>
-    <Link href="/referral">
+    <Link to="/referral">
       <a className="link">referral</a>
     </Link>
     <span>|</span>
-    <Link href="/claims">
+    <Link to="/claims">
       <a className="link">claims</a>
     </Link>
 
@@ -65,33 +67,24 @@ function MainContent() {
     return <ConnectWallet />;
   }
 
-  return <Switch>
-    <Route path="/" >
-      {()=><Container className='mintView text-center'>
+  return <Routes>
+    <Route path="/" element={<Container className='mintView text-center'>
             <MintView/>
             <OwnedView/>
-        </Container>
-      }
-    </Route>
+        </Container>}/>
 
-    <Route path="/referral">
-      {() => <ReferralView/>}
-    </Route>
+    <Route path="/referral" element={<ReferralView/>}/>
 
-    <Route path="/claims">
-      {() => <ClaimsView/>}
-    </Route>
+    <Route path="/claims" element={<ClaimsView/>}/>
 
-    <Route path="/:rest">
-      {(params) => <div>404 - nothing here</div>}
-    </Route>
+    <Route path="*" element={<div>404 - nothing here</div>}/>
 
-  </Switch>;
+  </Routes>;
 
 }
 
 export default function App() {
-  return <Web3Provider>
+  return <Web3Provider><HashRouter>
     <div className='app d-flex flex-column'>
 
       <Topbar />
@@ -103,5 +96,5 @@ export default function App() {
       <Bottombar/>
 
     </div>
-  </Web3Provider>;
+    </HashRouter></Web3Provider>;
 };

@@ -35,6 +35,7 @@ export default function OwnedView() {
                     return;
                 }
 
+                /*
                 const rabbitCache: RabbitCatchMaster = new web3.eth.Contract(RabbitCatchMaster_json.abi as any, chainInfo.contracts.rabbitMaster) as any;
 
                 const nftAddress = await rabbitCache.methods.czodiacNFT().call();
@@ -56,7 +57,7 @@ export default function OwnedView() {
                 console.log(`rabbitFancier :${rabbitFancier}`);
 
                 //const nft: CZodiacNFT = new web3.eth.Contract(CZodiacNFT_json.abi as any, nftAddress) as any;
-
+                */
 
                 const nft: CZodiacNFT = new web3.eth.Contract(CZodiacNFT_json.abi as any, chainInfo.contracts.czodiacNFT) as any;
 
@@ -69,7 +70,11 @@ export default function OwnedView() {
                     const tokenUri = await nft.methods.tokenURI(tokenId).call();
 
                     return { tokenId, tokenUri };
-                })) : []).filter(o=>{
+                })) : []);
+                
+                
+                
+                /*.filter(o=>{
                     if(chainInfo?.chainId == '97'){
                         //no filter for testnet
                         return true;
@@ -77,9 +82,9 @@ export default function OwnedView() {
 
                     const tokeIdNo = Number.parseInt(o.tokenId);
                     return tokeIdNo>=62 && tokeIdNo <= 2562;
-                });
+                });*/
 
-                setOwnedState({ result: [...result, ...result] });
+                setOwnedState({ result });
 
             } catch (error: any) {
                 setOwnedState({ error });
