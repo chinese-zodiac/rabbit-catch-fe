@@ -6,6 +6,9 @@ import { Spinner } from 'react-bootstrap';
 import { RabbitGreed } from '../../typechain/RabbitGreed';
 import RabbitGreed_json from '../../typechain/RabbitGreed.json';
 
+import { RabbitRocket } from '../../typechain/RabbitRocket';
+import RabbitRocket_json from '../../typechain/RabbitRocket.json';
+
 import { ShowAddress } from '../utils/display';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +24,8 @@ export default function WinnersView() {
         buys:string;
     }[]>>();
 
+    const [lastMinter, setLastMinter] = useState<IAsyncResult<string>>();
+
     const { chainInfo, account, web3 } = useweb3Context() || {};
 
     useEffect(() => {
@@ -28,6 +33,7 @@ export default function WinnersView() {
         (async () => {
             try {
                 setWinners({ isLoading: true });
+                setLastMinter({ isLoading: true});
 
 
                 if (!web3 || !chainInfo?.contracts?.rabbitGreed || !account) {
@@ -36,10 +42,13 @@ export default function WinnersView() {
                 }
 
                 const rabbitGreed: RabbitGreed = new web3.eth.Contract(RabbitGreed_json.abi as any, chainInfo.contracts.rabbitGreed) as any;
+                const rabbitRocket: RabbitRocket = new web3.eth.Contract(RabbitRocket_json.abi as any, chainInfo.contracts.rabbitRocket) as any;
 
                 const first = await rabbitGreed.methods.first().call();
                 const second = await rabbitGreed.methods.second().call();
                 const third = await rabbitGreed.methods.third().call();
+
+                const lastBuyer = await rabbitRocket.methods.lastBuyer().call(); 
 
                 const positions = [
                     { address: first, color: '#FFD700' },
@@ -53,6 +62,7 @@ export default function WinnersView() {
                 }));
 
                 setWinners({ result });
+                setLastMinter({result:lastBuyer});
 
                 console.log(`first ${first}, account: ${account}`);
 
@@ -84,6 +94,24 @@ export default function WinnersView() {
             </div>
             <ShowAddress address={s.address} />
             <span className='ms-1'>{s.buys}</span>
+        </div>
+        )}
+
+        
+        <h6>Rabbit Rocket (latest mint)</h6>
+        {!!lastMinter?.isLoading && <Spinner animation="border" variant="info" />}
+
+        {!!lastMinter?.error && <ShowError error={lastMinter?.error} />}
+        
+        {lastMinter?.result && (<div className='winnerItem d-flex align-items-center justify-content-center gap-3 mb-2'>
+            <div className="certHolder">
+                <FontAwesomeIcon className="certback" icon={faCertificate} style={{ color: '#FFD700' }} />
+                <span className="score">1</span>
+
+                {lastMinter.result.toUpperCase() == account?.toUpperCase() && <FontAwesomeIcon className='owned' icon={faCrown}/>}
+
+            </div>
+            <ShowAddress address={lastMinter.result} />
         </div>
         )}
     </div>;
