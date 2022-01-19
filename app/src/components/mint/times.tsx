@@ -35,8 +35,8 @@ export default function TimesView() {
                 const endEpoch = await rabbitRocket.methods.endEpoch().call();
 
                 const result = [
-                    { prompt: 'Rabbit starts', epoch: startEpoch },
-                    { prompt: 'Public minting starts', epoch: whitelistEndEpoch },
+                    { prompt: 'Game starts (max 5, whitelist only)', epoch: startEpoch },
+                    { prompt: 'Public minting (no limits)', epoch: whitelistEndEpoch },
                     { prompt: 'Might end', epoch: endEpoch }
                 ].map(c => {
                     const t = moment.unix(Number.parseInt(c.epoch));
