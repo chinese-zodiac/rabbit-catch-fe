@@ -87,6 +87,11 @@ export default function ReferralView() {
         {!!existing?.error && <ShowError error={existing.error} />}
 
         <div className="my-4">
+            
+            <p>Whenever someone uses your referral link, you earn 10% of their BNB.
+            <br/>The code persists, so if they buy again later you will earn more unless they delete or change their referrer.
+            <br/>Visit the <a href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch" target="_blank">whitepaper here</a> for more information.
+            </p>
 
             <span>Your earned referral rewards is <strong>{existing?.result?.payments || '...'}</strong> BNB </span>
             <Button className="mx-2" variant="info" size="sm" disabled={!existing?.result?.payments || existing?.result?.payments === '0'} onClick={async () => {
