@@ -108,6 +108,9 @@ export default function ClaimsView() {
 
     return <Container className="claims text-center">
         <h2>Claims</h2>
+        <p>Up to 1560 BNB in prizes are available to win! The prizes displayed assume all NFTs are minted. If the timer runs out early, they may be lower.</p>
+        <p>Prizes will be claimable 2 to 7 days after the Rabbit Catch ends.</p>
+        <p>Visit the <a href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch" target="_blank">whitepaper here</a> for more information.</p>
 
         {!!rewards?.isLoading && <Spinner animation='border' variant='primary' />}
 
