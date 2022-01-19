@@ -12,7 +12,7 @@ import TimesView from './times';
 import WinnersView from './winners';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 /*
@@ -110,6 +110,7 @@ export default function MintView() {
                     <a className="info-link" title="Click to visit Whitepaper for Rabbit Catch" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch">
                         <FontAwesomeIcon icon={faQuestionCircle} />
                     </a></h2>
+                    <p className="prize-link"><a target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch" >Up to <b>1560 BNB</b> in prizes <FontAwesomeIcon icon={faExternalLinkAlt} /></a></p>
 
                     {!!mintState?.isLoading && <Spinner animation="border" variant="primary" />}
 

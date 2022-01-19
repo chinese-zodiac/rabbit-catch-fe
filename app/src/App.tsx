@@ -12,7 +12,8 @@ import { ConnectWallet, Web3Provider, useweb3Context, useConnectCalls } from './
 import { ShowAddress } from './components/utils/display';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import MintView from './components/mint';
 import OwnedView from './components/owned';
@@ -43,9 +44,9 @@ function Socialbar(){
 
   return <div className='socialBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
 
-    <a className="link" target="_blank" href="https://t.me/CZodiacofficial">telegram🡥</a>
-    <a className="link" target="_blank" href="https://twitter.com/zodiacs_c">twitter🡥</a>
-    <a className="link" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch">whitepaper🡥</a>
+    <a className="link" target="_blank" href="https://t.me/CZodiacofficial"><FontAwesomeIcon icon={faTelegram} /></a>
+    <a className="link" target="_blank" href="https://twitter.com/zodiacs_c"><FontAwesomeIcon icon={faTwitter} /></a>
+    <a className="link" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch"><FontAwesomeIcon icon={faFileAlt} /></a>
 
 
   </div>;
