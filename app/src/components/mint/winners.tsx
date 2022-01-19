@@ -82,12 +82,13 @@ export default function WinnersView() {
 
         {!!winners?.error && <ShowError error={winners?.error} />}
 
-        <div className='mintedlabel me-2'>minted</div>
+        <div className='mintedlabel me-2'>prize at max, account, minted</div>
         
         {(winners?.result || []).map((s, i) => <div key={i} className='winnerItem d-flex align-items-center justify-content-center gap-3 mb-2'>
             <div className="certHolder">
                 <FontAwesomeIcon className="certback" icon={faCertificate} style={{ color: s.color }} />
                 <span className="score">{i + 1}</span>
+                <span className="bnb-amt"> {i==0?156:78} BNB </span>
 
                 {s.address.toUpperCase() == account?.toUpperCase() && <FontAwesomeIcon className='owned' icon={faCrown}/>}
 
@@ -102,11 +103,14 @@ export default function WinnersView() {
         {!!lastMinter?.isLoading && <Spinner animation="border" variant="info" />}
 
         {!!lastMinter?.error && <ShowError error={lastMinter?.error} />}
+
+        <div className='mintedlabel me-2'>prize at max, account</div>
         
         {lastMinter?.result && (<div className='winnerItem d-flex align-items-center justify-content-center gap-3 mb-2'>
             <div className="certHolder">
                 <FontAwesomeIcon className="certback" icon={faCertificate} style={{ color: '#FFD700' }} />
                 <span className="score">1</span>
+                <span className="bnb-amt"> 312 BNB </span>
 
                 {lastMinter.result.toUpperCase() == account?.toUpperCase() && <FontAwesomeIcon className='owned' icon={faCrown}/>}
 
