@@ -50,7 +50,7 @@ export default function TimesView() {
 
                     const duration =  moment.duration( t.diff(now));
 
-                    return `${c.prompt} in ${duration.format('D [days], h [hours]')}`;
+                    return `${c.prompt} in ${duration.format('D[d] h[h] m[m]')}`;
                 }).filter(s=>!!s);
 
 
