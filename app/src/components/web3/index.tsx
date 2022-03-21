@@ -16,7 +16,8 @@ const supportedChains: ChainInfo[] = [
         rabbitGreed:'0x44Bdd0BD0C408D51E466de4c480Fd2E56ca80912',
         rabbitCreed:'0xEA116b23d10e0e3FAB473FFa01e920A1B56393c3',
         rabbitFancier:'0x174a786a5dd24024Ce4b9865Cb37acFb6dc9C984',
-        rabbitBreed:'0x004204d403636D3343e7D2aEE584E673981a569c'
+        rabbitBreed:'0x004204d403636D3343e7D2aEE584E673981a569c',
+        rabbitMinterV2:'0x01aef2937A11B47A95a884f37Cf843BFB7880E18'
     } },
     { chainId: '97', name: 'bsc Testnet', hexChainId: '0x61', rpcProvider: 'https://data-seed-prebsc-1-s1.binance.org:8545/',contracts:{
         rabbitMaster:'0x0B354F634E142183827C6bB413E7afB4388D13C9',
@@ -25,7 +26,8 @@ const supportedChains: ChainInfo[] = [
         rabbitGreed:'0x2d5a53fF2850AEb2EEb1941B2D401A1a9B0C5B51',
         rabbitCreed:'0x3BB8d5Dec011be1EcA2592D6fd205E8F3947A59f',
         rabbitFancier:'0x70bA3b3fB8414293FC48e3Fbd47b706d1616FF7a',
-        rabbitBreed: '0xc164b60470B2bAED2006d4036e896313e742D208'
+        rabbitBreed: '0xc164b60470B2bAED2006d4036e896313e742D208',
+        rabbitMinterV2:''
     }  }
 ];
 

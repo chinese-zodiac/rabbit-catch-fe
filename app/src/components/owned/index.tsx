@@ -71,7 +71,7 @@ export default function OwnedView() {
 
                     return { tokenId, tokenUri };
                 })) : []);
-                
+                console.log(result)
                 
                 
                 /*.filter(o=>{
