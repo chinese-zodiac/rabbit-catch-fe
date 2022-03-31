@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 //the default chain needs to be the first One
 const supportedChains: ChainInfo[] = [
     { chainId: '56', name: 'Binance Smart Chain', hexChainId: '0x38', rpcProvider: 'https://bsc-dataseed.binance.org/', contracts:{
-        rabbitMaster:'0x0D3ab3581b81fd96b57e31Daf292150062489585',
+        rabbitMaster:'0x3387FFb2Ab13dDB3041573dF57041fC1b37Ba4de',
         czodiacNFT:'0x6Bf5843b39EB6D5d7ee38c0b789CcdE42FE396b4',
         rabbitRocket:'0x3aAe3529335724d3e2D1ae327860476e7dC3b202',
         rabbitGreed:'0x44Bdd0BD0C408D51E466de4c480Fd2E56ca80912',
