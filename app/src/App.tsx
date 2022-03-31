@@ -27,14 +27,6 @@ function Bottombar(){
   return <div className='bottomBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
 
     <Link to="/" className="link">mint</Link>
-    <span>|</span>
-    <Link to="/referral">
-      <a className="link">referral</a>
-    </Link>
-    <span>|</span>
-    <Link to="/claims">
-      <a className="link">claims</a>
-    </Link>
 
 
   </div>;
@@ -44,9 +36,9 @@ function Socialbar(){
 
   return <div className='socialBar d-flex flex-row justify-content-center text-white-50 align-items-center gap-4'>
 
-    <a className="link" target="_blank" href="https://t.me/CZodiacofficial"><FontAwesomeIcon icon={faTelegram} /></a>
-    <a className="link" target="_blank" href="https://twitter.com/zodiacs_c"><FontAwesomeIcon icon={faTwitter} /></a>
-    <a className="link" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch"><FontAwesomeIcon icon={faFileAlt} /></a>
+    <a className="link" target="_blank" rel="noreferrer" href="https://t.me/CZodiacofficial"><FontAwesomeIcon icon={faTelegram} /></a>
+    <a className="link" target="_blank" rel="noreferrer" href="https://twitter.com/zodiacs_c"><FontAwesomeIcon icon={faTwitter} /></a>
+    <a className="link" target="_blank" rel="noreferrer" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch"><FontAwesomeIcon icon={faFileAlt} /></a>
 
 
   </div>;
@@ -86,10 +78,6 @@ function MainContent() {
             <MintView/>
             <OwnedView/>
         </Container>}/>
-
-    <Route path="/referral" element={<ReferralView/>}/>
-
-    <Route path="/claims" element={<ClaimsView/>}/>
 
     <Route path="*" element={<div>404 - nothing here</div>}/>
 

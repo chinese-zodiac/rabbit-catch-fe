@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useweb3Context, useConnectCalls } from '../web3';
 import { IAsyncResult, ShowError, useQueryParams } from '../utils';
-import { Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap'
 
-import { RabbitCatchMaster } from '../../typechain/RabbitCatchMaster';
-import RabbitCatchMaster_json from '../../typechain/RabbitCatchMaster.json';
+import { RabbitMinterV2 } from '../../typechain/RabbitMinterV2';
+import RabbitMinterV2_json from '../../typechain/RabbitMinterV2.json';
 
 import { Row, Col, Button } from 'react-bootstrap';
 
@@ -70,12 +70,12 @@ export default function MintView() {
                 setMintState({ isLoading: true });
 
 
-                if (!web3 || !chainInfo?.contracts?.rabbitMaster || !account) {
+                if (!web3 || !chainInfo?.contracts?.rabbitMinterV2 || !account) {
                     throw new Error('web3 not yet initialized');
 
                 }
 
-                const rabbitCache: RabbitCatchMaster = new web3.eth.Contract(RabbitCatchMaster_json.abi as any, chainInfo.contracts.rabbitMaster) as any;
+                const rabbitCache: RabbitMinterV2 = new web3.eth.Contract(RabbitMinterV2_json.abi as any, chainInfo.contracts.rabbitMinterV2) as any;
 
                 const priceWei = await rabbitCache.methods.getPrice().call();
                 const price = web3.utils.fromWei(priceWei, "ether");
@@ -83,8 +83,8 @@ export default function MintView() {
                 const mintCount = await rabbitCache.methods.mintCount().call();
                 const mintCountMax = await rabbitCache.methods.mintCountMax().call();
 
-                const whitelist = await rabbitCache.methods.whitelist(account).call();
-                const canMint = await rabbitCache.methods.canMint(account).call();
+                const whitelist = true;
+                const canMint = await rabbitCache.methods.canMint().call();
 
                 setMintState({ result: { canMint, price, priceWei, mintCount,  mintCountMax, whitelist} });
 
@@ -110,8 +110,6 @@ export default function MintView() {
                     <a className="info-link" title="Click to visit Whitepaper for Rabbit Catch" target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch">
                         <FontAwesomeIcon icon={faQuestionCircle} />
                     </a></h2>
-                    <p className="prize-link"><a target="_blank" href="https://czodiac.gitbook.io/czodiac-litepapper/features-active/rabbit-catch" >Up to <b>1560 BNB</b> in prizes <FontAwesomeIcon icon={faExternalLinkAlt} /></a></p>
-
                     {!!mintState?.isLoading && <Spinner animation="border" variant="primary" />}
 
                     {!!mintState?.error && <ShowError error={mintState?.error} />}
@@ -119,10 +117,7 @@ export default function MintView() {
                     <p>Current price: <strong>{mintState?.result?.price || " ... "}</strong> BNB</p>
 
                     <p className='mintCount mb-3'>mint count {mintState?.result?.mintCount} of {mintState?.result?.mintCountMax}</p>
-                    <TimesView />
                 </div>
-
-                <WinnersView />
 
             </div>
 
@@ -139,15 +134,10 @@ export default function MintView() {
 
                     {!!submitted?.error && <ShowError error={submitted.error} />}
 
-                    {!!referralCode && <div className='refCode'>
-                        <span>Using referral code : <span className='text-info'>{referralCode}</span></span>
-                    </div>
-                    }
-
                     <Button disabled={!!submitted?.isLoading} variant="primary mintBtn" size="lg" onClick={async () => {
                         try {
 
-                            if (!web3 || !chainInfo?.contracts?.rabbitMaster || !account) {
+                            if (!web3 || !chainInfo?.contracts?.rabbitMinterV2 || !account) {
                                 throw new Error('web3 not yet initialized');
                             }
 
@@ -157,12 +147,12 @@ export default function MintView() {
 
                             setSubmitted({ isLoading: true });
 
-                            const rabbitCache: RabbitCatchMaster = new web3.eth.Contract(RabbitCatchMaster_json.abi as any, chainInfo.contracts.rabbitMaster) as any;
+                            const rabbitCache: RabbitMinterV2 = new web3.eth.Contract(RabbitMinterV2_json.abi as any, chainInfo.contracts.rabbitMinterV2) as any;
 
-                            const tx = await rabbitCache.methods.mint(account, referralCode||'').send({
+                            const tx = await rabbitCache.methods.mint(account).send({
                                 value: mintState?.result?.priceWei,
                                 from: account,
-                                to: chainInfo.contracts.rabbitMaster
+                                to: chainInfo.contracts.rabbitMinterV2
                             });
 
                             await reloadNFTs();
