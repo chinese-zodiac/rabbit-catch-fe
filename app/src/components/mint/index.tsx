@@ -3,8 +3,8 @@ import { useweb3Context, useConnectCalls } from '../web3';
 import { IAsyncResult, ShowError, useQueryParams } from '../utils';
 import { Spinner } from 'react-bootstrap'
 
-import { RabbitMinterV2 } from '../../typechain/RabbitMinterV2';
-import RabbitMinterV2_json from '../../typechain/RabbitMinterV2.json';
+import { RabbitMinterV3 } from '../../typechain/RabbitMinterV3';
+import RabbitMinterV3_json from '../../typechain/RabbitMinterV3.json';
 
 import { Row, Col, Button } from 'react-bootstrap';
 
@@ -70,12 +70,12 @@ export default function MintView() {
                 setMintState({ isLoading: true });
 
 
-                if (!web3 || !chainInfo?.contracts?.rabbitMinterV2 || !account) {
+                if (!web3 || !chainInfo?.contracts?.rabbitMinterV3 || !account) {
                     throw new Error('web3 not yet initialized');
 
                 }
 
-                const rabbitCache: RabbitMinterV2 = new web3.eth.Contract(RabbitMinterV2_json.abi as any, chainInfo.contracts.rabbitMinterV2) as any;
+                const rabbitCache: RabbitMinterV3 = new web3.eth.Contract(RabbitMinterV3_json.abi as any, chainInfo.contracts.rabbitMinterV3) as any;
 
                 const priceWei = await rabbitCache.methods.getPrice().call();
                 const price = web3.utils.fromWei(priceWei, "ether");
@@ -137,7 +137,7 @@ export default function MintView() {
                     <Button disabled={!!submitted?.isLoading} variant="primary mintBtn" size="lg" onClick={async () => {
                         try {
 
-                            if (!web3 || !chainInfo?.contracts?.rabbitMinterV2 || !account) {
+                            if (!web3 || !chainInfo?.contracts?.rabbitMinterV3 || !account) {
                                 throw new Error('web3 not yet initialized');
                             }
 
@@ -147,12 +147,12 @@ export default function MintView() {
 
                             setSubmitted({ isLoading: true });
 
-                            const rabbitCache: RabbitMinterV2 = new web3.eth.Contract(RabbitMinterV2_json.abi as any, chainInfo.contracts.rabbitMinterV2) as any;
+                            const rabbitCache: RabbitMinterV3 = new web3.eth.Contract(RabbitMinterV3_json.abi as any, chainInfo.contracts.rabbitMinterV3) as any;
 
                             const tx = await rabbitCache.methods.mint(account).send({
                                 value: mintState?.result?.priceWei,
                                 from: account,
-                                to: chainInfo.contracts.rabbitMinterV2
+                                to: chainInfo.contracts.rabbitMinterV3
                             });
 
                             await reloadNFTs();

@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "RabbitMinterV2",
-  "sourceName": "contracts/RabbitMinterv2.sol",
+  "contractName": "RabbitMinterV3",
+  "sourceName": "contracts/RabbitMinterv3.sol",
   "abi": [
     {
       "inputs": [],

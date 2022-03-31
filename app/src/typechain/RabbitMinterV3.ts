@@ -28,13 +28,13 @@ export type OwnershipTransferred = ContractEventLog<{
   1: string;
 }>;
 
-export interface RabbitMinterV2 extends BaseContract {
+export interface RabbitMinterV3 extends BaseContract {
   constructor(
     jsonInterface: any[],
     address?: string,
     options?: ContractOptions
-  ): RabbitMinterV2;
-  clone(): RabbitMinterV2;
+  ): RabbitMinterV3;
+  clone(): RabbitMinterV3;
   methods: {
     baseURI(): NonPayableTransactionObject<string>;
 

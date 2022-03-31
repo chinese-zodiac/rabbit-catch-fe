@@ -10,14 +10,14 @@ import { useLocation } from 'react-router-dom';
 //the default chain needs to be the first One
 const supportedChains: ChainInfo[] = [
     { chainId: '56', name: 'Binance Smart Chain', hexChainId: '0x38', rpcProvider: 'https://bsc-dataseed.binance.org/', contracts:{
-        rabbitMaster:'0x3387FFb2Ab13dDB3041573dF57041fC1b37Ba4de',
+        rabbitMaster:'0x0D3ab3581b81fd96b57e31Daf292150062489585',
         czodiacNFT:'0x6Bf5843b39EB6D5d7ee38c0b789CcdE42FE396b4',
         rabbitRocket:'0x3aAe3529335724d3e2D1ae327860476e7dC3b202',
         rabbitGreed:'0x44Bdd0BD0C408D51E466de4c480Fd2E56ca80912',
         rabbitCreed:'0xEA116b23d10e0e3FAB473FFa01e920A1B56393c3',
         rabbitFancier:'0x174a786a5dd24024Ce4b9865Cb37acFb6dc9C984',
         rabbitBreed:'0x004204d403636D3343e7D2aEE584E673981a569c',
-        rabbitMinterV2:'0x01aef2937A11B47A95a884f37Cf843BFB7880E18'
+        rabbitMinterV3:'0x3387FFb2Ab13dDB3041573dF57041fC1b37Ba4de'
     } },
     { chainId: '97', name: 'bsc Testnet', hexChainId: '0x61', rpcProvider: 'https://data-seed-prebsc-1-s1.binance.org:8545/',contracts:{
         rabbitMaster:'0x0B354F634E142183827C6bB413E7afB4388D13C9',
@@ -27,7 +27,7 @@ const supportedChains: ChainInfo[] = [
         rabbitCreed:'0x3BB8d5Dec011be1EcA2592D6fd205E8F3947A59f',
         rabbitFancier:'0x70bA3b3fB8414293FC48e3Fbd47b706d1616FF7a',
         rabbitBreed: '0xc164b60470B2bAED2006d4036e896313e742D208',
-        rabbitMinterV2:''
+        rabbitMinterV3:''
     }  }
 ];
 

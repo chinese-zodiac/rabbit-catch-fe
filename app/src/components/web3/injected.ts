@@ -13,7 +13,7 @@ export type ChainInfo = {
         rabbitCreed:string;
         rabbitBreed:string;
         rabbitFancier:string;
-        rabbitMinterV2:string;
+        rabbitMinterV3:string;
     }
 }
 
