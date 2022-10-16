@@ -59,8 +59,7 @@ export default function CardView({ tokenUri, tokenId }: TokenDetails) {
                         if (!image) {
                             throw new Error('failed to load NFT details');
                         }
-
-                        const tlUrl = `https://treasureland.market/assets/${chainInfo.contracts.czodiacNFT}/${tokenId}?chain_id=${chainInfo.chainId}`;
+                        const tlUrl = `https://www.treasureland.market/detail?chain_id=${chainInfo.chainId}&contract=${chainInfo.contracts.czodiacNFT}&order_id=&token_id=${tokenId}`
                         setCardDetails({ result: { tlUrl, image: image.replace('ipfs://', 'https://czodiac.mypinata.cloud/ipfs/') } });
         
                         break;
